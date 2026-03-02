@@ -19,6 +19,7 @@ JWT_COOKIE_EXPIRE=30
 ## 🚀 How to Run
 
 ```bash
+npm install
 npm run dev
 ```
 
