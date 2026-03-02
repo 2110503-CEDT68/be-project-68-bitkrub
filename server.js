@@ -3,8 +3,10 @@ const { setServers } = require("node:dns/promises");
 setServers(["1.1.1.1", "8.8.8.8"]);
 
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const connectDB = require('./config/db');
 const shops = require('./routes/shops');
 const services = require('./routes/services');
@@ -19,17 +21,28 @@ app.use(express.json());
 //Cookie parser
 app.use(cookieParser());
 
+//Enable CORS
+app.use(cors());
+
 //Load env vars
 dotenv.config({ path: './config/config.env' });
 
 //Connect to database
 connectDB();
 
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Mount routers
 app.use('/api/v1/shops', shops);
 app.use('/api/v1/services', services);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/reservations', reservations);
+
+// Serve index.html for root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const PORT= process.env.PORT || 5000;
 

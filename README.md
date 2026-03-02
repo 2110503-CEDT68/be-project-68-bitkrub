@@ -23,6 +23,9 @@ npm install
 npm run dev
 ```
 
+## 🌏 Access the Frontend
+👉 http://localhost:5000
+
 ## 🔧 How to do testcase
 
 ### Postman (Easiest)
