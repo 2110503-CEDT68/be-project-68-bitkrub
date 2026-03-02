@@ -10,7 +10,7 @@ package "Models" {
         *createdAt: Date <<generated>>
         --
         *name: String
-        *email: String
+        *email: String <<PK>>
         *password: String
         *telephone: String
         *role: String
